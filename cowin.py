@@ -28,12 +28,15 @@ def process(days, district_ids, age, availability_threshhold):
                             print("Available: ", message)
 
 
-numdays = 3
+# Note: District Ids can be obtained by hitting district CoWIN api: 
+# https://cdn-api.co-vin.in/api/v2/admin/location/districts/{state_id}
+district_ids = [265, 294] # Eg. (265: Bangalore Urban, 294: BBMP). Can be obtained by hitting district API
+numdays = 3 # number of days to look ahead
 age = 25
-district_ids = [265, 294] #265: Bangalore Urban, 294: BBMP
-sleep_time = 10
-availability_threshhold = 10
+availability_threshhold = 10 # filter out sessions where availability is below certain limits
+cooldown_time = 10 # waiting time
 
-for i in range(0, 5):
+while True:
     process(numdays, district_ids, age, availability_threshhold)
+    print("Cooling down.")
     sleep(sleep_time)
